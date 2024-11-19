@@ -1,0 +1,14 @@
+name: cykaplugin
+version: '1.0-SNAPSHOT'
+main: org.cyka.plugin
+api-version: '1.21'
+authors: [ disrupt ]
+commands:
+  track:
+    description: "Actively track a player's location using a compass."
+    usage: /<command> player
+  manage:
+    description: "Manage a player."
+    usage: /<command> player
+    permission: manager.player
+    permission-message: "You don't have permission to run this command."
