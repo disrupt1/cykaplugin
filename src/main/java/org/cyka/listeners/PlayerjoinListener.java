@@ -10,7 +10,7 @@ public class PlayerjoinListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         String playerName = event.getPlayer().getDisplayName();
-        event.setJoinMessage(ChatColor.GREEN + "Retard by the name of " + ChatColor.BOLD + ChatColor.YELLOW + playerName + ChatColor.YELLOW + " has joined the server.");
+        event.setJoinMessage(ChatColor.GREEN + "Idiot by the name of " + ChatColor.YELLOW + playerName + ChatColor.GREEN + " has joined the server.");
     }
 
     @EventHandler

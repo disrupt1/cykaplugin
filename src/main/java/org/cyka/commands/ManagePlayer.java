@@ -29,8 +29,8 @@ public class ManagePlayer implements CommandExecutor {
         } else {
             System.out.println("Only a player can run this command.");
         }
-        Player huntedPlayer = Bukkit.getPlayer(args[0]);
-        new ManagePlayerGUI(player, huntedPlayer);
+        Player target = Bukkit.getPlayer(args[0]);
+        new ManagePlayerGUI(player, target);
         return true;
     }
 

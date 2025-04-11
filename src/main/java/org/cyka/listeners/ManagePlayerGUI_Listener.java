@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.cyka.GUIs.ManageGamemodeGUI;
 
 import java.util.Objects;
@@ -13,18 +14,25 @@ import java.util.Objects;
 public class ManagePlayerGUI_Listener implements Listener {
 
     @EventHandler
+    public void onInventoryDrag(InventoryDragEvent e) {
+        if (e.getView().getTitle().equals(ChatColor.RED + "Manage Player")) {
+            e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         Player target = Bukkit.getPlayer(event.getView().getItem(22).getItemMeta().getDisplayName());
-        if (event.getView().getTitle().equals(ChatColor.RED +"Manage Player")) {
-            event.setCancelled(true);
-            if (target == null) {
-                player.closeInventory();
-                player.sendMessage("The target is not online.");
-            }
-            if (event.getCurrentItem() == null) {
-                return;
-            }
+        if (event.getCurrentItem() == null) {
+            return;
+        }
+        if (target == null) {
+            player.closeInventory();
+            player.sendMessage("The target is not online.");
+        }
+
+        if (event.getCurrentItem().hasItemMeta()) {
             if (Objects.requireNonNull(event.getCurrentItem().getItemMeta()).getDisplayName().equals(ChatColor.DARK_RED + "Kick player")) {
                 player.closeInventory();
                 try {
@@ -37,7 +45,6 @@ public class ManagePlayerGUI_Listener implements Listener {
             } else if (event.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.RED + "Kill player")) {
                 player.closeInventory();
                 try {
-                    assert target != null;
                     target.setHealth(0);
                     target.sendMessage("Killed by an operator.");
                     player.sendMessage(ChatColor.GREEN + "Target player successfully killed.");
@@ -60,7 +67,6 @@ public class ManagePlayerGUI_Listener implements Listener {
                 new ManageGamemodeGUI(player, target);
             }
         } else {
-            event.setCancelled(false);
             return;
         }
     }

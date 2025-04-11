@@ -13,11 +13,10 @@ import java.util.Arrays;
 public class ManagePlayerGUI {
 
     public ManagePlayerGUI (Player player, Player target) {
-        Inventory inventory = Bukkit.createInventory(null, 27, ChatColor.RED +"Manage Player");
+        Inventory inventory = Bukkit.createInventory(null, 27, ChatColor.RED + "Manage Player");
 
         ItemStack targetHead = new ItemStack(Material.PLAYER_HEAD, 1);
         ItemMeta targetHeadMeta = targetHead.getItemMeta();
-        assert targetHeadMeta != null;
         targetHeadMeta.setDisplayName(target.getName());
         targetHead.setItemMeta(targetHeadMeta);
         inventory.setItem(22, targetHead);
